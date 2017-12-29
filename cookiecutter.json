@@ -1,0 +1,13 @@
+{
+  "package_name": "package_name",
+  "package_display_name": "{{cookiecutter.package_name}}",
+  "package_short_description": "A description of the package",
+  "version": "0.0.1",
+  "full_name": "Your Name",
+  "email": "",
+  "github_user_name": "GithubUserName",
+  "github_repo_name": "{{cookiecutter.package_name}}",
+  "license": ["MIT license", "BSD license", "Apache Software License 2.0", "GNU General Public License v3", "Not open source"],
+  "year": "{% now 'utc', '%Y' %}",
+  "_extensions": ["jinja2_time.TimeExtension"]
+}
