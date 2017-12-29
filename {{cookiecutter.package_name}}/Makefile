@@ -21,8 +21,8 @@ help:
 venv:
 	@test -d "$(VENVS_DIR)" || mkdir -p "$(VENVS_DIR)"
 	@rm -Rf "$(VENV_DIR)"
-	@python3.6 -m venv "$(VENV_DIR)"
-	@source "$(VENV_DIR)"/bin/activate; pip install pip --upgrade; pip install -r requirements.dev.txt; pip install -e .;
+	@python -m venv "$(VENV_DIR)"
+	@/bin/bash -c "source $(VENV_DIR)/bin/activate && pip install pip --upgrade && pip install -r requirements.dev.txt && pip install -e ."
 	@echo "Enter virtual environment using:\n\n\t$ source $(VENV_DIR)/bin/activate\n"
 
 

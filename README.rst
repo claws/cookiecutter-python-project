@@ -2,7 +2,7 @@ Cookiecutter Python Project
 ###########################
 
 This project contains a Cookiecutter template to create new Python 3.6+
-projects. This approach takes lots of the boiler plate out of creating new
+projects. This approach takes most of the boiler plate out of creating new
 Python projects.
 
 Cookiecutter is a command-line utility that creates projects from templates.
@@ -18,42 +18,47 @@ tags ``{{`` and ``}}`` with names that it finds in the file
 The Python project structure produced by this Cookiecutter template
 contains the following items:
 
-  - A minimal README.rst file.
-  - A Makefile that automates common developer tasks, such as:
-    - Run unit tests.
-    - Run code coverage checks.
-    - Run style compliance checks.
-    - Run type annotations checks.
-    - Generate documentation.
-    - Generate, test and upload a project release to PyPI.
-  - A ``setup.py`` file used to generate project install and releases.
-  - A ``CONTRIBUTING.rst`` guide. On Github this file is shown when sending
-     a pull request or an issue. This file gets included in the generated
-     documentation.
-  - an empty ``CHANGELOG.rst`` file. This file gets included in the documentation.
-  - A ``License`` file that defaults to the MIT License. Change this if
-    you choose a license other than MIT.
-  - A ``tests`` directory containing a basic unit test (using unittest) and
-    a shell script that can be used to test a wheel distribution of the
-    package.
-  - A ``.travis.yml`` file for continuous integration setup.
-  - A ``docs`` directory with a pre-configured Sphinx documentation setup. It
-    contains:
-    - A minimal index.rst page
-    - A user focused page containing information such as install, API
-      and a link to the change log.
-    - A change log file.
-    - A developer focused page containing information such as contributing,
-      testing, code coverage, style compliance, type annotations and
-      documentation.
-  - An ``examples`` directory with a minimal example script. This script is
-    called and tested as part of the unit tests.
+- A minimal README.rst file.
+- A Makefile that automates common developer tasks, such as:
+
+  - Run unit tests.
+  - Run code coverage checks.
+  - Run style compliance checks.
+  - Run type annotations checks.
+  - Generate documentation.
+  - Generate, test and upload a project release to PyPI.
+
+- A ``setup.py`` file used to generate project install and releases.
+- A ``CONTRIBUTING.rst`` guide. On Github this file is shown when sending
+  a pull request or an issue. This file gets included in the generated
+  documentation.
+- an empty ``CHANGELOG.rst`` file. This file gets included in the documentation.
+- A ``License`` file that defaults to the MIT License. Change this if
+  you choose a license other than MIT.
+- A ``tests`` directory containing a basic unit test (using unittest) and
+  a shell script that can be used to test a wheel distribution of the
+  package.
+- A ``.travis.yml`` file for continuous integration setup.
+- A ``docs`` directory with a pre-configured Sphinx documentation setup. It
+  contains:
+
+  - A minimal ``index.rst`` page
+
+  - A user focused page containing information such as install, API
+    and a link to the change log.
+
+  - A developer focused page containing information such as contributing,
+    testing, code coverage, style compliance, type annotations and
+    documentation.
+
+- An ``examples`` directory with a minimal example script. This script is
+  called and tested as part of the unit tests.
 
 It is assumed that the new Python package will eventually be:
 
-  - hosted on Github (or perhaps GitLab)
-  - published to PyPI (using bdist_wheel)
-  - linked to ReadTheDocs.
+- hosted on Github (or perhaps GitLab)
+- published to PyPI (using bdist_wheel)
+- linked to ReadTheDocs.
 
 The generated docs have some references and links to those sites.
 
@@ -61,21 +66,19 @@ The generated docs have some references and links to those sites.
 Getting Started
 ===============
 
-.. _one-time-setup-steps-label:
-
 One Time Setup Steps
 --------------------
 
 You need to prepare two locations to store content:
 
-  - A place where you store your projects (git repositories). You probably
-    have a folder for that already (e.g. ``git-repos``). We will call this
-    location $REPOS_DIR.
+- A place where you store your projects (git repositories). You probably
+  have a folder for that already (e.g. ``git-repos``). We will call this
+  location $REPOS_DIR.
 
-  - A place to store Python virtual environments. Avoid putting your virtual
-    environment in your project directory next to your code. This will avoid
-    accidentally adding venv content to a git change set. We will call this
-    location $VENVS_DIR.
+- A place to store Python virtual environments. Avoid putting your virtual
+  environment in your project directory next to your code. This will avoid
+  accidentally adding venv content to a git change set. We will call this
+  location $VENVS_DIR.
 
 Create a new virtual environment for cookiecutter and install cookiecutter
 using ``pip``:
@@ -90,8 +93,6 @@ using ``pip``:
 You are now ready to create a new Python project from the Cookiecutter
 template provided by this project.
 
-
-.. _create-new-project-label:
 
 Create a new project
 --------------------
@@ -114,14 +115,16 @@ at Github (where gh is an abbreviated shortened form for Github):
 
     (ccenv) $ cookiecutter gh:claws/cookiecutter-python-project
 
-You will be prompted for input unless you suppress it with --no-input:
+You will be prompted for input:
 
-  - Prompts are the keys in cookiecutter.json.
-  - Default responses are the values in cookiecutter.json.
-  - Prompts are shown in order.
+- Prompts are the keys in cookiecutter.json.
+- Default responses are the values in cookiecutter.json.
+- Prompts are shown in order.
 
-You should now have a new Python project. Once you have created the project
-you can exit the cookiecutter virtual environment.
+You should now have a new Python project.
+
+You can exit the cookiecutter virtual environment as it is no longer
+required.
 
 .. code-block:: console
 
@@ -143,9 +146,9 @@ use the new project.
 - If you do not plan to publish project artifacts at GitHub, PyPI or
   ReadTheDocs then remove any links to those sites. Affected files are:
 
-    - README.rst
-    - setup.py
-    - docs/source/index.rst
+  - README.rst
+  - setup.py
+  - docs/source/index.rst
 
 - Update any additional useful classifiers in ``setup.py``. The list of
   available classifiers can be found `here <https://pypi.python.org/pypi?:action=list_classifiers>`_.
@@ -155,10 +158,10 @@ Example
 =======
 
 Below is an example showing exactly how to create a new Python project using
-this project. In this case the package is called ``example``.
+this project. In this scenario the package is called ``example``.
 
 At this point it is assumed that you have performed the actions outlined in
-:ref:`one-time-setup-steps-label`. This provides a virtual environment that
+the One Time Setup Steps section above. This provides a virtual environment that
 makes cookiecutter available.
 
 Create the ``example`` project using cookiecutter.
@@ -183,22 +186,24 @@ Create the ``example`` project using cookiecutter.
     Choose from 1, 2, 3, 4, 5 [1]:
     year [2017]:
     (ccenv) $ deactivate
+    $
 
-Perform initial project checks.
-
-.. note::
-
-    The ``make style`` step will raise the following git-related error because the
-    project is not yet controlled by git. This error will not be seen once the
-    project is under version control.
-
-    .. code-block::
-
-        fatal: Not a git repository (or any of the parent directories): .git
+The project has been created in the ``example`` directory.
 
 .. code-block:: console
 
     $ cd example
+
+We can now kick the tires of this new project by performing some initial
+project checks.
+
+First, let's create a project specific virtual environment and activate it.
+This will install all of the project's development dependencies as well as
+the project itself. The project will be install as an editable package (by
+using the ``-e`` flag to ``pip``).
+
+.. code-block:: console
+
     $ make venv
     ...
     Enter virtual environment using:
@@ -207,6 +212,17 @@ Perform initial project checks.
 
     $ source path/to/venvs/example/bin/activate
     (example) $
+
+Now that we have a virtual environment we can check the remaining convenience
+functions provided by the Makefile.
+
+Note that ``make style`` step will raise a git-related error because the
+project is not yet controlled by git. The error occurs because the rule
+queries git for modified files. This error will not be seen once the project
+is under version control.
+
+.. code-block:: console
+
     (example) $ make style
     (example) $ make check_types
     (example) $ make test
