@@ -84,17 +84,17 @@ docs: coverage
 docs.serve:
 	@cd docs/build; python -m http.server
 
-# help: dist                           - create a source distribution package
+# help: dist                           - create a wheel distribution package
 dist:
 	@python setup.py bdist_wheel
 
 
-# help: dist.test                      - test a source distribution package
+# help: dist.test                      - test a whell distribution package
 dist.test: dist
 	@cd dist && ../tests/test-dist.bash ./{{cookiecutter.package_name}}-*-py3-none-any.whl
 
 
-# help: dist.upload                    - upload a source distribution package
+# help: dist.upload                    - upload a wheel distribution package
 dist.upload:
 	@twine upload dist/{{cookiecutter.package_name}}-*-py3-none-any.whl
 
