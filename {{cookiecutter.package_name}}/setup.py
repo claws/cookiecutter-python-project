@@ -2,7 +2,7 @@ import os
 import re
 from setuptools import setup, find_packages
 
-regexp = re.compile(r'.*__version__ = \'(.*?)\'', re.S)
+regexp = re.compile(r'.*__version__ = [\'\"](.*?)[\'\"]', re.S)
 
 base_package = '{{cookiecutter.package_name}}'
 base_path = os.path.dirname(__file__)
