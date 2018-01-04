@@ -81,6 +81,7 @@ docs: coverage
 	@cd docs; cp -R source/coverage build/html/.
 
 
+# help: docs.serve                     - serve project html documentation
 docs.serve:
 	@cd docs/build; python -m http.server
 
