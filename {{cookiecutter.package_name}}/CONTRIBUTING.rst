@@ -41,8 +41,7 @@ Before you submit a pull request, check that it meets these guidelines:
 Workflow
 --------
 
-{{cookiecutter.package_name}} is developed using a test-driven process.
-The workflow that developers use to fix a bug or add enhancements typically
+The workflow that developers typically use to fix a bug or add enhancements
 follows this sequence:
 
 * Fork the ``{{cookiecutter.github_repo_name}}`` repo.
@@ -54,7 +53,7 @@ follows this sequence:
       $ git clone git@github.com:your_name_here/{{cookiecutter.github_repo_name}}.git
       $ cd {{cookiecutter.package_name}}
 
-* Create a git branch for local development:
+* Create a branch for local development:
 
   .. code-block:: console
 
@@ -62,29 +61,32 @@ follows this sequence:
 
   Now you can make your changes locally.
 
+* Familiarize yourself with the developer convenience rules in the Makefile.
+
+  .. code-block:: console
+
+      $ make help
+
 * Create and activate a Python virtual environment for local development.
 
   .. code-block:: console
 
-      $ python[3.6] -m venv ../myvenv
-      $ source ../myvenv/bin/activate
+      $ make venv
+      $ source path/to/myvenv/bin/activate
       (myvenv) $
 
   These instructions create the virtual environment outside the repo
   directory so that it never accidentally gets added to the change
   set.
 
-* Familiarize yourself with the developer convenience rules in the Makefile.
-
-.. code-block:: console
-
-    (myvenv) $ make help
-
 * Develop fix or enhancement:
 
   * Make a fix or enhancement (e.g. modify a class, method, function, module,
     etc).
-  * Update an existing unit test or create a new unit test module.
+
+  * Update an existing unit test or create a new unit test module to verify
+    the change works as expected.
+
   * Run the test suite.
 
     .. code-block:: console
