@@ -71,8 +71,14 @@ Code Style
 
 Adopting a consistent code style assists with maintenance.
 
-Use the Makefile convenience rule to check code style compliance and fix
-problems if necessary.
+Use the Makefile convenience rule to check code style compliance.
+
+.. code-block:: console
+
+    (myvenv) $ make style
+
+A separate style fix rule is available to automate fixing minor problems.
+More complicated problems will need to be fixed manually.
 
 .. code-block:: console
 
@@ -114,5 +120,58 @@ directory.
 
     (myvenv) $ make docs.serve
 
-This rule starts a simple Python web server in the directory that Sphinx
-writes generated content into.
+This rule runs a Python web server to serve the Sphinx generated content.
+The output can be viewed at http://0.0.0.0:8000/
+
+
+.. _release-label:
+
+Release Process
+===============
+
+The following steps are used to make a new software release.
+
+The steps assume they are executed from within a development virtual
+environment.
+
+- Check that the package version label in ``__init__.py`` is correct.
+
+- Create and push a repo tag to Github. As a convention use the package
+  version number (e.g. YY.MM.MICRO) as the tag.
+
+  .. code-block:: console
+
+      $ git checkout master
+      $ git tag YY.MM.MICRO -m "A meaningful release tag comment"
+      $ git tag  # check release tag is in list
+      $ git push --tags origin master
+
+  - This will trigger Github to create a release at:
+
+    ::
+
+        https://github.com/{username}/{{cookiecutter.package_name}}/releases/{tag}
+
+- Create the release distribution. This project produces an artefact called a
+  pure Python wheel. The wheel file will be created in the ``dist`` directory.
+
+  .. code-block:: console
+
+      (myvenv) $ make dist
+
+- Test the release distribution. This involves creating a virtual environment,
+  installing the distribution into it and running project tests against the
+  installed distribution. These steps have been captured for convenience in a
+  Makefile rule.
+
+  .. code-block:: console
+
+      (myvenv) $ make dist.test
+
+- Upload the release to PyPI using
+
+  .. code-block:: console
+
+      (myvenv) $ make dist.upload
+
+  The package should now be available at https://pypi.org/project/{{cookiecutter.package_name}}/

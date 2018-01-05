@@ -4,7 +4,7 @@
 {{cookiecutter.package_short_description}}
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :numbered:
    :hidden:
 
