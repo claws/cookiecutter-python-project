@@ -3,50 +3,22 @@ Contributing Guide
 
 Contributions are welcome and greatly appreciated!
 
-.. _contributing-expectations-label:
-
-Expectations
-------------
-
-Before you submit a pull request, check that it meets these guidelines:
-
-1. A pull request should cover one bug-fix or enhancement feature.
-
-2. A pull request should preferably only have one commit upon the
-   current master HEAD, (via rebases and squash).
-
-3. If the pull request contains code changes then:
-
-  - it should include tests (in the ``tests`` directory) that specifically
-    verify the behaviour of the modification.
-
-  - it should be style compliant (``make style`` and ``make style.fix``
-    can be useful here).
-
-  - it should include type annotations where appropriate
-    (``make check_types`` can be useful here).
-
-  - if the code changes are non-trivial:
-
-    - the docs should be updated.
-    - the change log should be updated.
-
-4. The tests run cleanly.
-
-5. The docs build runs cleanly.
-
 
 .. _contributing-workflow-label:
 
 Workflow
 --------
 
+A bug-fix or enhancement is delivered using a pull request. A good pull request
+should cover one bug-fix or enhancement feature. This ensures the change set is
+easier to review and less likely to need major re-work or even be rejected.
+
 The workflow that developers typically use to fix a bug or add enhancements
-follows this sequence:
+is as follows.
 
-* Fork the ``{{cookiecutter.github_repo_name}}`` repo.
+* Fork the ``{{cookiecutter.github_repo_name}}`` repo into your account.
 
-* Obtain the source.
+* Obtain the source by cloning it onto your development machine.
 
   .. code-block:: console
 
@@ -72,12 +44,16 @@ follows this sequence:
   .. code-block:: console
 
       $ make venv
-      $ source path/to/myvenv/bin/activate
-      (myvenv) $
+      $ source path/to/<venv-name>/bin/activate
+      (venv) $
 
-  These instructions create the virtual environment outside the repo
-  directory so that it never accidentally gets added to the change
-  set.
+  The rule creates the virtual environment outside the project directory so
+  that it never accidentally gets added to the change set.
+
+  .. note::
+
+      (venv) is used to indicate when the commands should be run within the
+      virtual environment containing the development dependencies.
 
 * Develop fix or enhancement:
 
@@ -91,33 +67,48 @@ follows this sequence:
 
     .. code-block:: console
 
-        (myvenv) $ make test
+        (venv) $ make test
+
+    See the :ref:`testing-label` section for more information on testing.
 
   * Check code coverage of the area of code being modified.
 
     .. code-block:: console
 
-        (myvenv) $ make coverage
+        (venv) $ make check-coverage
 
-    Review the output produced in ``docs/source/coverage/coverage.html``.
+    Review the output produced in ``docs/source/coverage/coverage.html``. Add
+    additional test steps, where practical, to improve coverage.
 
-  * Perform style check.
-
-    .. code-block:: console
-
-        (myvenv) $ make style
-
-    Use the ``style.fix`` rule to automatically fix minor issues.
-
-  * Perform type annotations check.
+  * The change should be style compliant. Perform style check.
 
     .. code-block:: console
 
-        (myvenv) $ make check_types
+        (venv) $ make check-style
+
+    See the :ref:`style-compliance-label` section for more information.
+
+  * The change should include type annotations where appropriate.
+    Perform type annotations check.
+
+    .. code-block:: console
+
+        (venv) $ make check-types
+
+    See the :ref:`annotations-label` section for more information.
 
   * Fix any errors or regressions.
 
-* Commit your changes and push them to your branch (e.g. Github, Gitlab):
+* The docs and the change log should be updated for anything but trivial bug
+  fixes. Perform docs check.
+
+    .. code-block:: console
+
+        (venv) $ make docs
+
+  See the :ref:`documentation-label` section for more information.
+
+* Commit and push changes to your fork.
 
   .. code-block:: console
 
@@ -125,7 +116,10 @@ follows this sequence:
       $ git commit -m "A detailed description of the changes."
       $ git push origin name-of-your-bugfix-or-feature
 
-* Check automated continuous integration steps all pass. Fix any problems
-  if necessary.
+  A pull request should preferably only have one commit upon the current
+  master HEAD, (via rebases and squash).
 
 * Submit a pull request through the service website (e.g. Github, Gitlab).
+
+* Check automated continuous integration steps all pass. Fix any problems
+  if necessary and update the pull request.

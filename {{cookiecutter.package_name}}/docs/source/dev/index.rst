@@ -22,13 +22,13 @@ Use the Makefile convenience rules to run the tests.
 
 .. code-block:: console
 
-    (myvenv) $ make test
+    (venv) $ make test
 
 To run tests verbosely use:
 
 .. code-block:: console
 
-    (myvenv) $ make test.verbose
+    (venv) $ make test-verbose
 
 Alternatively, you may want to run the tests suite directly. The following
 steps assume you are running in a virtual environment in which the
@@ -38,14 +38,14 @@ variable so that the ``{{cookiecutter.package_name}}`` package can be found.
 
 .. code-block:: console
 
-    (myvenv) $ cd tests
-    (myvenv) $ python -m unittest
+    (venv) $ cd tests
+    (venv) $ python -m unittest
 
 Individual unit tests can be run also.
 
 .. code-block:: console
 
-    (myvenv) $ python3 -m test_basic
+    (venv) $ python -m test_basic
 
 
 .. _test-coverage-label:
@@ -59,7 +59,7 @@ Use the Makefile convenience rule to run the tests.
 
 .. code-block:: console
 
-    (myvenv) $ make coverage
+    (venv) $ make check-coverage
 
 The test code coverage report can be found `here <../coverage/coverage.html>`_
 
@@ -75,14 +75,14 @@ Use the Makefile convenience rule to check code style compliance.
 
 .. code-block:: console
 
-    (myvenv) $ make style
+    (venv) $ make check-style
 
 A separate style fix rule is available to automate fixing minor problems.
 More complicated problems will need to be fixed manually.
 
 .. code-block:: console
 
-    (myvenv) $ make style.fix
+    (venv) $ make fix-style
 
 
 .. _annotations-label:
@@ -97,7 +97,7 @@ Use the Makefile convenience rule to check no issues are reported.
 
 .. code-block:: console
 
-    (myvenv) $ make check_types
+    (venv) $ make check-types
 
 
 .. _documentation-label:
@@ -111,17 +111,17 @@ set of `sphinx <http://sphinx-doc.org/>`_ html content.
 
 .. code-block:: console
 
-    (myvenv) $ make docs
+    (venv) $ make docs
 
 To quickly view the docs developers should use the Makefile in the top level
 directory.
 
 .. code-block:: console
 
-    (myvenv) $ make docs.serve
+    (venv) $ make serve-docs
 
 This rule runs a Python web server to serve the Sphinx generated content.
-The output can be viewed at http://0.0.0.0:8000/
+The output can be viewed at http://127.0.0.1:8000/
 
 
 .. _release-label:
@@ -157,7 +157,7 @@ environment.
 
   .. code-block:: console
 
-      (myvenv) $ make dist
+      (venv) $ make dist
 
 - Test the release distribution. This involves creating a virtual environment,
   installing the distribution into it and running project tests against the
@@ -166,12 +166,12 @@ environment.
 
   .. code-block:: console
 
-      (myvenv) $ make dist.test
+      (venv) $ make dist-test
 
 - Upload the release to PyPI using
 
   .. code-block:: console
 
-      (myvenv) $ make dist.upload
+      (venv) $ make dist-upload
 
   The package should now be available at https://pypi.org/project/{{cookiecutter.package_name}}/
