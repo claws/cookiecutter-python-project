@@ -31,8 +31,8 @@ clean:
 	@git clean -X -f -d
 
 
-# help: clean.scrub                    - clean all files, even untracked files
-clean.scrub:
+# help: scrub                          - clean all files, even untracked files
+scrub:
 	git clean -x -f -d
 
 
@@ -41,13 +41,13 @@ test:
 	@python -m unittest discover -s tests
 
 
-# help: test.verbose                   - run tests [verbosely]
-test.verbose:
+# help: test-verbose                   - run tests [verbosely]
+test-verbose:
 	@python -m unittest discover -s tests -v
 
 
-# help: coverage                       - perform test coverage checks
-coverage:
+# help: check-coverage                 - perform test coverage checks
+check-coverage:
 	@coverage run -m unittest discover -s tests
 	@# produce html coverage report on modules
 	@coverage html -d docs/source/coverage --include="src/{{cookiecutter.package_name}}/*"
@@ -55,47 +55,47 @@ coverage:
 	@cd docs/source/coverage; mv index.html coverage.html
 
 
-# help: style                          - perform pep8 check
-style:
+# help: check-style                    - perform pep8 check
+check-style:
 	@pycodestyle --exclude=.git,docs,$(shell $(STYLE_EXCLUDE_LIST)) --ignore=E309,E402 --max-line-length=$(STYLE_MAX_LINE_LENGTH) src/{{cookiecutter.package_name}} tests
 
 
-# help: style.fix                      - perform check with autopep8 fixes
-style.fix:
+# help: fix-style                      - perform check with autopep8 fixes
+fix-style:
 	@# If there are no files to fix then autopep8 typically returns an error
 	@# because it did not get passed any files to work on. Use xargs -r to
 	@# avoid this problem.
 	@pycodestyle --exclude=.git,docs,$(shell $(STYLE_EXCLUDE_LIST)) --ignore=E309,E402 --max-line-length=$(STYLE_MAX_LINE_LENGTH) src/{{cookiecutter.package_name}} tests -q  | xargs -r autopep8 -i --max-line-length=$(STYLE_MAX_LINE_LENGTH)
 
 
-# help: check_types                    - check type hint annotations
-check_types:
+# help: check-types                    - check type hint annotations
+check-types:
 	@cd src; MYPYPATH=$(VENV_DIR)/lib/python*/site-packages mypy -p {{cookiecutter.package_name}} --ignore-missing-imports
 
 
 # help: docs                           - generate project documentation
-docs: coverage
+docs: check-coverage
 	@cd docs; rm -rf source/api/{{cookiecutter.package_name}}*.rst source/api/modules.rst build/*
-	@cd docs; sphinx-apidoc -o ./source/api ../src/{{cookiecutter.package_name}}
 	@cd docs; make html
+	@# Copy coverage output into docs build tree
 	@cd docs; cp -R source/coverage build/html/.
 
 
-# help: docs.serve                     - serve project html documentation
-docs.serve:
-	@cd docs/build; python -m http.server
+# help: serve-docs                     - serve project html documentation
+serve-docs:
+	@cd docs/build; python -m http.server --bind 127.0.0.1
 
 # help: dist                           - create a wheel distribution package
 dist:
 	@python setup.py bdist_wheel
 
 
-# help: dist.test                      - test a whell distribution package
-dist.test: dist
+# help: dist-test                      - test a whell distribution package
+dist-test: dist
 	@cd dist && ../tests/test-dist.bash ./{{cookiecutter.package_name}}-*-py3-none-any.whl
 
 
-# help: dist.upload                    - upload a wheel distribution package
+# help: dist-upload                    - upload a wheel distribution package
 dist.upload:
 	@twine upload dist/{{cookiecutter.package_name}}-*-py3-none-any.whl
 
@@ -105,5 +105,5 @@ dist.upload:
 # help:
 
 .PHONY: \
-	check_types clean clean.scrub coverage dist dist.test dist.upload
-	docs help style style.fix test test.verbose venv
+	check-style check-types clean coverage dist dist-test dist-upload
+	docs fix-style help scrub serve-docs test test-verbose venv

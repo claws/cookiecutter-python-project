@@ -9,7 +9,19 @@ installing and quickly using this package.
 Install Guide
 =============
 
-The simplest way to install {{cookiecutter.package_display_name}} is using Pip:
+.. note::
+
+    It is best practice to install run Python projects in a virtual
+    environment, which can be created and activated as follows using
+    Python 3.6+.
+
+    .. code-block:: console
+
+        $ python -m venv venv
+        $ source venv/bin/activate
+        (venv) $ pip install {{cookiecutter.package_name}}
+
+The simplest way to install {{cookiecutter.package_display_name}} is using Pip.
 
 .. code-block:: console
 

@@ -19,22 +19,26 @@ The Python project structure produced by this Cookiecutter template
 contains the following items:
 
 - A minimal README.rst file.
-- A Makefile that automates common developer tasks, such as:
+- A Makefile that automates many common developer tasks, such as:
 
-  - Run unit tests.
-  - Run code coverage checks.
-  - Run style compliance checks.
-  - Run type annotations checks.
-  - Generate documentation.
-  - Generate, test and upload a project release to PyPI.
+  - Running unit tests.
+  - Checking code coverage.
+  - Checking style compliance.
+  - Checking type annotations.
+  - Generating documentation.
+  - Generating, testing and uploading a project release to PyPI.
 
 - A ``setup.py`` file used to generate project install and releases.
 - A ``CONTRIBUTING.rst`` guide. On Github this file is shown when sending
-  a pull request or an issue. This file gets included in the generated
+  a pull request or an issue. This file also gets included in the generated
+  developer documentation.
+- An empty ``CHANGELOG.rst`` file. This file gets included in the user
   documentation.
-- an empty ``CHANGELOG.rst`` file. This file gets included in the documentation.
 - A ``License`` file that defaults to the MIT License. Change this if
   you choose a license other than MIT.
+- An ``examples`` directory with a minimal quickstart example script. This
+  script imports the package and prints the package version. It is also
+  called by the unit test suite to ensure it always works.
 - A ``tests`` directory containing a basic unit test (using unittest) and
   a shell script that can be used to test a wheel distribution of the
   package.
@@ -44,15 +48,13 @@ contains the following items:
 
   - A minimal ``index.rst`` page
 
-  - A user focused page containing information such as install, API
-    and a link to the change log.
+  - A user focused page containing information such as installation
+    instructions, API docs, a link to the change log and instructions
+    about how to raise a bug.
 
   - A developer focused page containing information such as contributing,
     testing, code coverage, style compliance, type annotations and
     documentation.
-
-- An ``examples`` directory with a minimal example script. This script is
-  called and tested as part of the unit tests.
 
 It is assumed that the new Python package will eventually be:
 

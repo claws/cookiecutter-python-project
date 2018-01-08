@@ -13,8 +13,8 @@
    dev/index
 
 
-Getting Started
-===============
+Quick Start
+===========
 
 {{cookiecutter.package_display_name}} is available on PyPI and can be installed with `pip <https://pip.pypa.io>`_.
 

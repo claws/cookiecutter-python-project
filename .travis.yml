@@ -14,11 +14,11 @@ script:
   - cd example
   - pip install -r requirements.dev.txt
   - pip install -e .
-  - make style
-  - make check_types
+  - make check-style
+  - make check-types
   - make test
-  - make test.verbose
-  - make coverage
+  - make test-verbose
+  - make check-coverage
   - make docs
   - make dist
-  - make dist.test
+  - make dist-test

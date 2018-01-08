@@ -19,13 +19,15 @@
 #
 import os
 import re
-# import sys
+import sys
+from sphinx import apidoc
 # sys.path.insert(0, os.path.abspath('.'))
 
 
 regexp = re.compile(r'.*__version__ = [\'\"](.*?)[\'\"]', re.S)
 repo_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-init_file = os.path.join(repo_root, 'src', '{{cookiecutter.package_name}}', '__init__.py')
+pkg_root = os.path.join(repo_root, 'src', '{{cookiecutter.package_name}}')
+init_file = os.path.join(pkg_root, '__init__.py')
 with open(init_file, 'r') as f:
     module_content = f.read()
     match = regexp.match(module_content)
@@ -133,3 +135,14 @@ html_sidebars = {
         'navigation.html',
     ]
 }
+
+
+# -- Custom config to work around readthedocs.org #1139 -------------------
+
+def run_apidoc(_):
+    output_path = os.path.join(repo_root, 'docs', 'source', 'api')
+    apidoc.main([None, '--force', '-o', output_path, pkg_root])
+
+
+def setup(app):
+    app.connect('builder-inited', run_apidoc)
