@@ -160,25 +160,31 @@ Example
 =======
 
 Below is an example showing exactly how to create a new Python project using
-this project. In this scenario the package is called ``example``.
+this project. In this scenario the package is called ``example_project``.
 
 At this point it is assumed that you have performed the actions outlined in
-the One Time Setup Steps section above. This provides a virtual environment that
-makes cookiecutter available.
+the One Time Setup Steps section above. This provides a virtual environment
+that makes cookiecutter available.
 
-Create the ``example`` project using cookiecutter.
+Create the ``example`` project using cookiecutter. The first question asks
+for the package display name. This human friendly label is used in docs to
+refer to the project. It is then used to create a candidate package name so
+it should not contain special characters that are invalid when used in a
+Python attribute. It can have spaces and hyphens in it. The package display
+name is first converted to lowercase text and then any spaces or hyphens are
+converted to underscores to produce a Python package name.
 
 .. code-block:: console
 
     (ccenv) $ cookiecutter ../python-project-template
-    package_name [package_name]: example
-    package_display_name [example]: Example
+    package_display_name [Example Project]: Example Project
+    package_name [package_name]: example_project
     package_short_description [A description of the package]: This package provides example capability
     version [0.0.1]:
     full_name [Your Name]: First Last
     email []:
     github_user_name [GithubUserName]: flast
-    github_repo_name [example]:
+    github_repo_name [example_project]:
     Select license:
     1 - MIT license
     2 - BSD license
@@ -190,11 +196,11 @@ Create the ``example`` project using cookiecutter.
     (ccenv) $ deactivate
     $
 
-The project has been created in the ``example`` directory.
+The project has been created in the ``example_project`` directory.
 
 .. code-block:: console
 
-    $ cd example
+    $ cd example_project
 
 We can now kick the tires of this new project by performing some initial
 project checks.
@@ -210,9 +216,9 @@ using the ``-e`` flag to ``pip``).
     ...
     Enter virtual environment using:
 
-      	source path/to/venvs/example/bin/activate
+      	source path/to/venvs/example_project/bin/activate
 
-    $ source path/to/venvs/example/bin/activate
+    $ source path/to/venvs/example_project/bin/activate
     (example) $
 
 Now that we have a virtual environment we can check the remaining convenience
