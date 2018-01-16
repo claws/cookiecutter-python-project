@@ -160,15 +160,16 @@ Example
 =======
 
 Below is an example showing exactly how to create a new Python project using
-this project. In this scenario the package is called ``example_project``.
+the template in this project. In this scenario the package is called
+``example_project``.
 
 At this point it is assumed that you have performed the actions outlined in
 the One Time Setup Steps section above. This provides a virtual environment
 that makes cookiecutter available.
 
-Create the ``example`` project using cookiecutter. The first question asks
-for the package display name. This human friendly label is used in docs to
-refer to the project. It is then used to create a candidate package name so
+Run cookiecutter and pass it a reference to the template. The first question
+asks for the package display name. This human friendly label is used in docs
+to refer to the project. It is then used to create a candidate package name so
 it should not contain special characters that are invalid when used in a
 Python attribute. It can have spaces and hyphens in it. The package display
 name is first converted to lowercase text and then any spaces or hyphens are
@@ -178,7 +179,7 @@ converted to underscores to produce a Python package name.
 
     (ccenv) $ cookiecutter ../python-project-template
     package_display_name [Example Project]: Example Project
-    package_name [package_name]: example_project
+    package_name [example_project]: example_project
     package_short_description [A description of the package]: This package provides example capability
     version [0.0.1]:
     full_name [Your Name]: First Last
@@ -224,19 +225,19 @@ using the ``-e`` flag to ``pip``).
 Now that we have a virtual environment we can check the remaining convenience
 functions provided by the Makefile.
 
-Note that ``make style`` step will raise a git-related error because the
+Note that ``make check-style`` step will raise a git-related error because the
 project is not yet controlled by git. The error occurs because the rule
 queries git for modified files. This error will not be seen once the project
 is under version control.
 
 .. code-block:: console
 
-    (example) $ make style
-    (example) $ make check_types
+    (example) $ make check-style  # This will fail until git controlled
+    (example) $ make check-types
     (example) $ make test
-    (example) $ make test.verbose
-    (example) $ make coverage
+    (example) $ make test-verbose
+    (example) $ make check-coverage
     (example) $ make docs
-    (example) $ make docs.serve  # in browser navigate to http://localhost:8000/html
+    (example) $ make docs-serve  # in browser navigate to http://localhost:8000/html
     (example) $ make dist
-    (example) $ make dist.test
+    (example) $ make dist-test

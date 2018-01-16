@@ -23,7 +23,7 @@ venv:
 	@rm -Rf "$(VENV_DIR)"
 	@python3 -m venv "$(VENV_DIR)"
 	@/bin/bash -c "source $(VENV_DIR)/bin/activate && pip install pip --upgrade && pip install -r requirements.dev.txt && pip install -e ."
-	@echo "Enter virtual environment using:\n\n\t$ source $(VENV_DIR)/bin/activate\n"
+	@echo -e "Enter virtual environment using:\n\n\t$ source $(VENV_DIR)/bin/activate\n"
 
 
 # help: clean                          - clean all files using .gitignore rules
@@ -96,7 +96,7 @@ dist-test: dist
 
 
 # help: dist-upload                    - upload a wheel distribution package
-dist.upload:
+dist-upload:
 	@twine upload dist/{{cookiecutter.package_name}}-*-py3-none-any.whl
 
 
