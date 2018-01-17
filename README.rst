@@ -238,6 +238,6 @@ is under version control.
     (example) $ make test-verbose
     (example) $ make check-coverage
     (example) $ make docs
-    (example) $ make docs-serve  # in browser navigate to http://localhost:8000/html
+    (example) $ make serve-docs  # in browser navigate to http://localhost:8000/html
     (example) $ make dist
     (example) $ make dist-test
