@@ -160,8 +160,8 @@ Example
 =======
 
 Below is an example showing exactly how to create a new Python project using
-the template in this project. In this scenario the package is called
-``example_project``.
+the template in this project. In this scenario the project is called
+``abc 123`` and the Python package is called ``abc_123``.
 
 At this point it is assumed that you have performed the actions outlined in
 the One Time Setup Steps section above. This provides a virtual environment
@@ -177,15 +177,15 @@ converted to underscores to produce a Python package name.
 
 .. code-block:: console
 
-    (ccenv) $ cookiecutter ../python-project-template
-    package_display_name [Example Project]: Example Project
-    package_name [example_project]: example_project
-    package_short_description [A description of the package]: This package provides example capability
+    (ccenv) $ cookiecutter ../cookiecutter-python-project/
+    package_display_name [Package-Name]: abc 123
+    package_name [abc_123]:
+    package_short_description [A description of the package]: This is my abc 123 package.
     version [0.0.1]:
     full_name [Your Name]: First Last
     email []:
     github_user_name [GithubUserName]: flast
-    github_repo_name [example_project]:
+    github_repo_name [abc_123]:
     Select license:
     1 - MIT license
     2 - BSD license
@@ -193,15 +193,13 @@ converted to underscores to produce a Python package name.
     4 - GNU General Public License v3
     5 - Not open source
     Choose from 1, 2, 3, 4, 5 [1]:
-    year [2017]:
-    (ccenv) $ deactivate
-    $
+    year [2018]:
 
-The project has been created in the ``example_project`` directory.
+The project has been created in the ``abc_123`` directory.
 
 .. code-block:: console
 
-    $ cd example_project
+    $ cd abc_123
 
 We can now kick the tires of this new project by performing some initial
 project checks.
@@ -217,10 +215,10 @@ using the ``-e`` flag to ``pip``).
     ...
     Enter virtual environment using:
 
-      	source path/to/venvs/example_project/bin/activate
+      	source path/to/venvs/abc_123/bin/activate
 
-    $ source path/to/venvs/example_project/bin/activate
-    (example) $
+    $ source path/to/venvs/abc_123/bin/activate
+    (abc_123) $
 
 Now that we have a virtual environment we can check the remaining convenience
 functions provided by the Makefile.
@@ -232,12 +230,13 @@ is under version control.
 
 .. code-block:: console
 
-    (example) $ make check-style  # This will fail until git controlled
-    (example) $ make check-types
-    (example) $ make test
-    (example) $ make test-verbose
-    (example) $ make check-coverage
-    (example) $ make docs
-    (example) $ make serve-docs  # in browser navigate to http://localhost:8000/html
-    (example) $ make dist
-    (example) $ make dist-test
+    (abc_123) $ make check-style  # This will fail until git controlled
+    (abc_123) $ make check-types
+    (abc_123) $ make test
+    (abc_123) $ make test-verbose
+    (abc_123) $ make check-coverage
+    (abc_123) $ make check-docs
+    (abc_123) $ make docs
+    (abc_123) $ make serve-docs  # in browser navigate to http://localhost:8000/html
+    (abc_123) $ make dist
+    (abc_123) $ make dist-test
