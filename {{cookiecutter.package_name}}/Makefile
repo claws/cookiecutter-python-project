@@ -14,39 +14,46 @@ VENV_DIR := $(VENVS_DIR)/{{cookiecutter.package_name}}
 # help:
 
 # help: help                           - display this makefile's help information
+.PHONY: help
 help:
 	@grep "^# help\:" Makefile | grep -v grep | sed 's/\# help\: //' | sed 's/\# help\://'
 
 # help: venv                           - create a virtual environment for development
+.PHONY: venv
 venv:
 	@test -d "$(VENVS_DIR)" || mkdir -p "$(VENVS_DIR)"
 	@rm -Rf "$(VENV_DIR)"
 	@python3 -m venv "$(VENV_DIR)"
 	@/bin/bash -c "source $(VENV_DIR)/bin/activate && pip install pip --upgrade && pip install -r requirements.dev.txt && pip install -e ."
-	@echo -e "Enter virtual environment using:\n\n\t$ source $(VENV_DIR)/bin/activate\n"
+	@echo "Enter virtual environment using:\n\n\t$ source $(VENV_DIR)/bin/activate\n"
 
 
 # help: clean                          - clean all files using .gitignore rules
+.PHONY: clean
 clean:
 	@git clean -X -f -d
 
 
 # help: scrub                          - clean all files, even untracked files
+.PHONY: scrub
 scrub:
 	git clean -x -f -d
 
 
 # help: test                           - run tests
+.PHONY: test
 test:
 	@python -m unittest discover -s tests
 
 
 # help: test-verbose                   - run tests [verbosely]
+.PHONY: test-verbose
 test-verbose:
 	@python -m unittest discover -s tests -v
 
 
 # help: check-coverage                 - perform test coverage checks
+.PHONY: check-coverage
 check-coverage:
 	@coverage run -m unittest discover -s tests
 	@# produce html coverage report on modules
@@ -56,11 +63,13 @@ check-coverage:
 
 
 # help: check-style                    - perform pep8 check
+.PHONY: check-style
 check-style:
 	@pycodestyle --exclude=.git,docs,$(shell $(STYLE_EXCLUDE_LIST)) --ignore=E309,E402 --max-line-length=$(STYLE_MAX_LINE_LENGTH) src/{{cookiecutter.package_name}} tests
 
 
 # help: fix-style                      - perform check with autopep8 fixes
+.PHONY: fix-style
 fix-style:
 	@# If there are no files to fix then autopep8 typically returns an error
 	@# because it did not get passed any files to work on. Use xargs -r to
@@ -69,11 +78,13 @@ fix-style:
 
 
 # help: check-types                    - check type hint annotations
+.PHONY: check-types
 check-types:
 	@cd src; MYPYPATH=$(VENV_DIR)/lib/python*/site-packages mypy -p {{cookiecutter.package_name}} --ignore-missing-imports
 
 
 # help: docs                           - generate project documentation
+.PHONY: check-coverage
 docs: check-coverage
 	@cd docs; rm -rf source/api/{{cookiecutter.package_name}}*.rst source/api/modules.rst build/*
 	@cd docs; make html
@@ -81,21 +92,32 @@ docs: check-coverage
 	@cd docs; cp -R source/coverage build/html/.
 
 
+# help: check-docs                     - quick check docs consistency
+.PHONY: check-docs
+check-docs:
+	@cd docs; make dummy
+
+
 # help: serve-docs                     - serve project html documentation
+.PHONY: serve-docs
 serve-docs:
 	@cd docs/build; python -m http.server --bind 127.0.0.1
 
+
 # help: dist                           - create a wheel distribution package
+.PHONY: dist
 dist:
 	@python setup.py bdist_wheel
 
 
 # help: dist-test                      - test a whell distribution package
+.PHONY: dist-test
 dist-test: dist
 	@cd dist && ../tests/test-dist.bash ./{{cookiecutter.package_name}}-*-py3-none-any.whl
 
 
 # help: dist-upload                    - upload a wheel distribution package
+.PHONY: dist-upload
 dist-upload:
 	@twine upload dist/{{cookiecutter.package_name}}-*-py3-none-any.whl
 
@@ -103,7 +125,3 @@ dist-upload:
 # Keep these lines at the end of the file to retain nice help
 # output formatting.
 # help:
-
-.PHONY: \
-	check-style check-types clean coverage dist dist-test dist-upload
-	docs fix-style help scrub serve-docs test test-verbose venv
