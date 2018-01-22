@@ -113,15 +113,19 @@ set of `sphinx <http://sphinx-doc.org/>`_ html content.
 
     (venv) $ make docs
 
-To quickly view the docs developers should use the Makefile in the top level
-directory.
+To quickly check consistency of ReStructuredText files use the dummy run which
+does not actually generate HTML content.
+
+.. code-block:: console
+
+    (venv) $ make check-docs
+
+To quickly view the HTML rendered docs, start a simple web server and open a
+browser to http://127.0.0.1:8000/.
 
 .. code-block:: console
 
     (venv) $ make serve-docs
-
-This rule runs a Python web server to serve the Sphinx generated content.
-The output can be viewed at http://127.0.0.1:8000/
 
 
 .. _release-label:

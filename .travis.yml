@@ -19,6 +19,7 @@ script:
   - make test
   - make test-verbose
   - make check-coverage
+  - make check-docs
   - make docs
   - make dist
   - make dist-test
