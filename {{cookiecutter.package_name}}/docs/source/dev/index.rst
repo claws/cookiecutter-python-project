@@ -69,20 +69,13 @@ The test code coverage report can be found `here <../coverage/coverage.html>`_
 Code Style
 ==========
 
-Adopting a consistent code style assists with maintenance.
-
-Use the Makefile convenience rule to check code style compliance.
-
-.. code-block:: console
-
-    (venv) $ make check-style
-
-A separate style fix rule is available to automate fixing minor problems.
-More complicated problems will need to be fixed manually.
+Adopting a consistent code style assists with maintenance. This project uses
+the code style formatter called Black. A Makefile convenience rule to enforce
+code style compliance is available.
 
 .. code-block:: console
 
-    (venv) $ make fix-style
+    (venv) $ make style
 
 
 .. _annotations-label:

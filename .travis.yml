@@ -14,7 +14,7 @@ script:
   - cd example
   - pip install -r requirements.dev.txt
   - pip install -e .
-  - make check-style
+  - make style
   - make check-types
   - make test
   - make test-verbose
