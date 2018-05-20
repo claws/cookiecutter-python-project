@@ -20,7 +20,7 @@
 import os
 import re
 import sys
-from sphinx import apidoc
+from sphinx.ext import apidoc
 # sys.path.insert(0, os.path.abspath('.'))
 
 
@@ -141,7 +141,7 @@ html_sidebars = {
 
 def run_apidoc(_):
     output_path = os.path.join(repo_root, 'docs', 'source', 'api')
-    apidoc.main([None, '--force', '-o', output_path, pkg_root])
+    apidoc.main(['-o', output_path, '-f', pkg_root])
 
 
 def setup(app):

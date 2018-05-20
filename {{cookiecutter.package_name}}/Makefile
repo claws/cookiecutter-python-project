@@ -2,8 +2,6 @@
 # Most actions assume it is operating in a virtual environment where the
 # python command links to the appropriate virtual environment Python.
 
-STYLE_EXCLUDE_LIST := git status --porcelain --ignored | grep "!!" | grep ".py$$" | cut -d " " -f2 | tr "\n" ","
-STYLE_MAX_LINE_LENGTH := 160
 VENVS_DIR := $(HOME)/.venvs
 VENV_DIR := $(VENVS_DIR)/{{cookiecutter.package_name}}
 
@@ -62,19 +60,11 @@ check-coverage:
 	@cd docs/source/coverage; mv index.html coverage.html
 
 
-# help: check-style                    - perform pep8 check
-.PHONY: check-style
-check-style:
-	@pycodestyle --exclude=.git,docs,$(shell $(STYLE_EXCLUDE_LIST)) --ignore=E309,E402 --max-line-length=$(STYLE_MAX_LINE_LENGTH) src/{{cookiecutter.package_name}} tests
+# help: style                          - perform code format compliance check
+.PHONY: style
+style:
+	@black src/{{cookiecutter.package_name}} tests
 
-
-# help: fix-style                      - perform check with autopep8 fixes
-.PHONY: fix-style
-fix-style:
-	@# If there are no files to fix then autopep8 typically returns an error
-	@# because it did not get passed any files to work on. Use xargs -r to
-	@# avoid this problem.
-	@pycodestyle --exclude=.git,docs,$(shell $(STYLE_EXCLUDE_LIST)) --ignore=E309,E402 --max-line-length=$(STYLE_MAX_LINE_LENGTH) src/{{cookiecutter.package_name}} tests -q  | xargs -r autopep8 -i --max-line-length=$(STYLE_MAX_LINE_LENGTH)
 
 
 # help: check-types                    - check type hint annotations

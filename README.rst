@@ -223,14 +223,9 @@ using the ``-e`` flag to ``pip``).
 Now that we have a virtual environment we can check the remaining convenience
 functions provided by the Makefile.
 
-Note that ``make check-style`` step will raise a git-related error because the
-project is not yet controlled by git. The error occurs because the rule
-queries git for modified files. This error will not be seen once the project
-is under version control.
-
 .. code-block:: console
 
-    (abc_123) $ make check-style  # This will fail until git controlled
+    (abc_123) $ make style
     (abc_123) $ make check-types
     (abc_123) $ make test
     (abc_123) $ make test-verbose

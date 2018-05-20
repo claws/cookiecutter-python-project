@@ -1,8 +1,7 @@
 -r requirements.txt
-autopep8
+black
 coverage
 mypy
-pycodestyle
 sphinx
 twine
 wheel
