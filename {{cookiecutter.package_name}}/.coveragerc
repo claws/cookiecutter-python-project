@@ -1,14 +1,25 @@
 [run]
 branch = True
+source =
+    {{cookiecutter.package_name}}
+
+[paths]
+source =
+    src/{{cookiecutter.package_name}}
+    **/site-packages/{{cookiecutter.package_name}}
 
 [report]
 exclude_lines =
-	pragma: no cover
-	def __repr__
-	if self.debug
-	raise AssertionError
-	raise NotImplentedError
-	if 0:
-	if __name__ == .__main__.:
+    pragma: no cover
+    def __repr__
+    if self.debug
+    raise AssertionError
+    raise NotImplentedError
+    if 0:
+    if __name__ == .__main__.:
 
 ignore_errors = True
+
+[html]
+title = {{cookiecutter.package_name}} Coverage Test Report
+directory = docs/source/_static/coverage

@@ -22,15 +22,15 @@ Use the Makefile convenience rules to run the tests.
 
 .. code-block:: console
 
-    (venv) $ make test
+    ({{cookiecutter.package_name}}) $ make test
 
 To run tests verbosely use:
 
 .. code-block:: console
 
-    (venv) $ make test-verbose
+    ({{cookiecutter.package_name}}) $ make test-verbose
 
-Alternatively, you may want to run the tests suite directly. The following
+Alternatively, you may want to run the test suite directly. The following
 steps assume you are running in a virtual environment in which the
 ``{{cookiecutter.package_name}}`` package has been installed. If this is
 not the case then you will likely need to set the ``PYTHONPATH`` environment
@@ -38,14 +38,14 @@ variable so that the ``{{cookiecutter.package_name}}`` package can be found.
 
 .. code-block:: console
 
-    (venv) $ cd tests
-    (venv) $ python -m unittest
+    ({{cookiecutter.package_name}}) $ cd tests
+    ({{cookiecutter.package_name}}) $ python -m unittest
 
 Individual unit tests can be run also.
 
 .. code-block:: console
 
-    (venv) $ python -m test_basic
+    ({{cookiecutter.package_name}}) $ python -m test_version
 
 
 .. _test-coverage-label:
@@ -53,15 +53,14 @@ Individual unit tests can be run also.
 Coverage
 ========
 
-The ``coverage`` tool can be run to collect code test coverage metrics.
-
-Use the Makefile convenience rule to run the tests.
+The ``coverage`` tool is used to collect code test coverage metrics. Use the
+Makefile convenience rule to run the code coverage checks.
 
 .. code-block:: console
 
-    (venv) $ make check-coverage
+    ({{cookiecutter.package_name}}) $ make coverage
 
-The test code coverage report can be found `here <../coverage/coverage.html>`_
+The test code coverage report can be found `here <../_static/coverage/index.html>`_
 
 
 .. _style-compliance-label:
@@ -70,27 +69,73 @@ Code Style
 ==========
 
 Adopting a consistent code style assists with maintenance. This project uses
-the code style formatter called Black. A Makefile convenience rule to enforce
-code style compliance is available.
+Black to format code and isort to sort imports. Use the Makefile convenience rule
+to apply code style fixes.
 
 .. code-block:: console
 
-    (venv) $ make style
+    ({{cookiecutter.package_name}}) $ make style
+
+.. _format-label:
+
+Code Formatting
+---------------
+
+A Makefile convenience rule exists to perform just code format fixes.
+
+.. code-block:: console
+
+    ({{cookiecutter.package_name}}) $ make format
+
+.. _import-sort-label:
+
+Import Sorting
+--------------
+
+A Makefile convenience rule exists to perform just module import sorting fixes.
+
+.. code-block:: console
+
+    ({{cookiecutter.package_name}}) $ make sort-imports
+
+
+.. _static-analysis-label:
+
+Static Analysis
+===============
+
+A Makefile convenience rule exists to simplify performing static analysis
+checks. This will perform linting and type annotations checks.
+
+.. code-block:: console
+
+    ({{cookiecutter.package_name}}) $ make check-static-analysis
+
+
+.. _code-linting-label:
+
+Code Linting
+------------
+
+A Makefile convenience rule exists to perform code linting checks.
+
+.. code-block:: console
+
+    ({{cookiecutter.package_name}}) $ make check-lint
 
 
 .. _annotations-label:
 
 Type Annotations
-================
+----------------
 
 The code base contains type annotations to provide helpful type information
-that can improve code maintenance.
-
-Use the Makefile convenience rule to check no issues are reported.
+that can improve code maintenance. A Makefile convenience rule exists to check
+no type annotations issues are reported.
 
 .. code-block:: console
 
-    (venv) $ make check-types
+    ({{cookiecutter.package_name}}) $ make check-types
 
 
 .. _documentation-label:
@@ -104,21 +149,21 @@ set of `sphinx <http://sphinx-doc.org/>`_ html content.
 
 .. code-block:: console
 
-    (venv) $ make docs
+    ({{cookiecutter.package_name}}) $ make docs
 
 To quickly check consistency of ReStructuredText files use the dummy run which
 does not actually generate HTML content.
 
 .. code-block:: console
 
-    (venv) $ make check-docs
+    ({{cookiecutter.package_name}}) $ make check-docs
 
 To quickly view the HTML rendered docs, start a simple web server and open a
 browser to http://127.0.0.1:8000/.
 
 .. code-block:: console
 
-    (venv) $ make serve-docs
+    ({{cookiecutter.package_name}}) $ make serve-docs
 
 
 .. _release-label:
@@ -154,7 +199,7 @@ environment.
 
   .. code-block:: console
 
-      (venv) $ make dist
+      ({{cookiecutter.package_name}}) $ make dist
 
 - Test the release distribution. This involves creating a virtual environment,
   installing the distribution into it and running project tests against the
@@ -163,12 +208,12 @@ environment.
 
   .. code-block:: console
 
-      (venv) $ make dist-test
+      ({{cookiecutter.package_name}}) $ make dist-test
 
 - Upload the release to PyPI using
 
   .. code-block:: console
 
-      (venv) $ make dist-upload
+      ({{cookiecutter.package_name}}) $ make dist-upload
 
   The package should now be available at https://pypi.org/project/{{cookiecutter.package_name}}/

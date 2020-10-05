@@ -1,6 +1,7 @@
 import os
 import re
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 regexp = re.compile(r'.*__version__ = [\'\"](.*?)[\'\"]', re.S)
 
@@ -56,5 +57,7 @@ if __name__ == '__main__':
         zip_safe=False,
         classifiers=['Development Status :: 3 - Alpha',
                      'Intended Audience :: Developers',
-                     'Programming Language :: Python :: 3.6']
+                     'Programming Language :: Python :: 3.6',
+                     'Programming Language :: Python :: 3.7',
+                     'Programming Language :: Python :: 3.8']
     )

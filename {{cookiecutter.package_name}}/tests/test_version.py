@@ -1,14 +1,10 @@
-
-import {{cookiecutter.package_name}}
 import unittest
 
+import {{cookiecutter.package_name}}
 
-class BasicTestCase(unittest.TestCase):
-    """ Basic test cases """
 
-    def test_basic(self):
-        """ check True is True """
-        self.assertTrue(True)
+class VersionTestCase(unittest.TestCase):
+    """ Version tests """
 
     def test_version(self):
         """ check {{cookiecutter.package_name}} exposes a version attribute """

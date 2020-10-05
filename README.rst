@@ -1,30 +1,30 @@
 Cookiecutter Python Project
 ###########################
 
-This project contains a Cookiecutter template to create new Python 3.6+
-projects. This approach takes most of the boiler plate out of creating new
-Python projects.
+This project contains a Cookiecutter template that helps you create new Python
+3.6+ package projects by automatically generating most of the boiler plate
+content for you.
 
 Cookiecutter is a command-line utility that creates projects from templates.
 Cookiecutter lets you to easily and quickly bootstrap a new project from a
 template which allows you to skip all manual setup and common mistakes when
 starting a new project.
 
-Cookiecutter takes a source directory tree and copies it into your new
-project. It replaces all the names that it finds surrounded by templating
-tags ``{{`` and ``}}`` with names that it finds in the file
-``cookiecutter.json``.
+Cookiecutter takes a source directory tree and copies it into your new project.
+It replaces all the names that it finds surrounded by templating tags ``{{``
+and ``}}`` with names that it finds in the file ``cookiecutter.json``.
 
-The Python project structure produced by this Cookiecutter template
-contains the following items:
+The Python project structure produced by this Cookiecutter template contains
+the following items:
 
 - A minimal README.rst file.
 - A Makefile that automates many common developer tasks, such as:
 
+  - Creating a Virtual environment
+  - Checking code style.
+  - Performing static analysis checks.
   - Running unit tests.
   - Checking code coverage.
-  - Checking style compliance.
-  - Checking type annotations.
   - Generating documentation.
   - Generating, testing and uploading a project release to PyPI.
 
@@ -42,9 +42,8 @@ contains the following items:
 - A ``tests`` directory containing a basic unit test (using unittest) and
   a shell script that can be used to test a wheel distribution of the
   package.
-- A ``.travis.yml`` file for continuous integration setup.
-- A ``docs`` directory with a pre-configured Sphinx documentation setup. It
-  contains:
+- A Github Actions continuous integration configuration.
+- A ``docs`` directory with pre-configured Sphinx documentation containing:
 
   - A minimal ``index.rst`` page
 
@@ -59,7 +58,7 @@ contains the following items:
 It is assumed that the new Python package will eventually be:
 
 - hosted on Github (or perhaps GitLab)
-- published to PyPI (using bdist_wheel)
+- published to PyPI
 - linked to ReadTheDocs.
 
 The generated docs have some references and links to those sites.
@@ -71,26 +70,17 @@ Getting Started
 One Time Setup Steps
 --------------------
 
-You need to prepare two locations to store content:
-
-- A place where you store your projects (git repositories). You probably
-  have a folder for that already (e.g. ``git-repos``). We will call this
-  location $REPOS_DIR.
-
-- A place to store Python virtual environments. Avoid putting your virtual
-  environment in your project directory next to your code. This will avoid
-  accidentally adding venv content to a git change set. We will call this
-  location $VENVS_DIR.
-
-Create a new virtual environment for cookiecutter and install cookiecutter
-using ``pip``:
+The process for using Cookiecutter to create a new Python package project
+starts with installing Cookiecutter. This is best done by creating a new
+virtual environment specifically for cookiecutter and then installing
+cookiecutter using ``pip``. The example below shows how to do this.
 
 .. code-block:: console
 
-    $ python -m venv $VENVS_DIR/ccenv
-    $ source $VENVS_DIR/ccenv/bin/activate
-    (ccenv) $
-    (ccenv) $ pip install cookiecutter
+    $ python -m venv ccvenv --prompt cc
+    $ source ccvenv/bin/activate
+    (cc) $ pip install pip -U  # update pip to avoid any warnings
+    (cc) $ pip install cookiecutter
 
 You are now ready to create a new Python project from the Cookiecutter
 template provided by this project.
@@ -99,38 +89,35 @@ template provided by this project.
 Create a new project
 --------------------
 
-To create a new Python project based on a cookiecutter template simply
-navigate to a directory where you want to create the new project (e.g
-$REPOS_DIR) and run the ``cookiecutter`` command with this template as a
-command line argument.
+To create a new Python package project based on this cookiecutter template
+simply navigate to a directory where you want to create the new project, then
+run the ``cookiecutter`` command with a command line argument referencing this
+template.
 
-If you have cloned a local copy of this template you can use that:
-
-.. code-block:: console
-
-    (ccenv) $ cookiecutter path/to/cookiecutter-python-project
-
-Alternatively you can create a new project by referencing this template
-at Github (where gh is an abbreviated shortened form for Github):
+The easiest method is to reference this template via its Github URL (where 'gh'
+is a shortened form for Github):
 
 .. code-block:: console
 
-    (ccenv) $ cookiecutter gh:claws/cookiecutter-python-project
+    (cc) $ cookiecutter gh:claws/cookiecutter-python-project
 
-You will be prompted for input:
-
-- Prompts are the keys in cookiecutter.json.
-- Default responses are the values in cookiecutter.json.
-- Prompts are shown in order.
-
-You should now have a new Python project.
-
-You can exit the cookiecutter virtual environment as it is no longer
-required.
+Alternatively, if you have cloned a local copy of this template you can
+reference it directly:
 
 .. code-block:: console
 
-    (ccenv) $ deactivate
+    (cc) $ cookiecutter path/to/cookiecutter-python-project
+
+You will be prompted for user input to configure the project. Prompts are the
+keys in 'cookiecutter.json' and default responses are the values. Prompts are
+shown in order.
+
+Once you have generated your new Python package project you can exit the
+cookiecutter virtual environment as it is no longer required.
+
+.. code-block:: console
+
+    (cc) $ deactivate
     $
 
 
@@ -138,8 +125,8 @@ Manual Modifications
 --------------------
 
 Some aspects of generating a project in a generic approach are not practical
-to completely automate so there may be a few steps remaining before you can
-use the new project.
+to completely automate so there may be a few steps remaining before you begin
+using the new project.
 
 - If you specify a license other than MIT then you will need to update the
   ``LICENSE`` file to contain your license content. By default it contains
@@ -163,17 +150,18 @@ Below is an example showing exactly how to create a new Python project using
 the template in this project. In this scenario the project is called
 ``abc 123`` and the Python package is called ``abc_123``.
 
-At this point it is assumed that you have performed the actions outlined in
-the One Time Setup Steps section above. This provides a virtual environment
-that makes cookiecutter available.
+It is assumed that you have performed the actions outlined in the One Time
+Setup Steps section above which provides a virtual environment with
+cookiecutter installed into it.
 
-Run cookiecutter and pass it a reference to the template. The first question
-asks for the package display name. This human friendly label is used in docs
-to refer to the project. It is then used to create a candidate package name so
-it should not contain special characters that are invalid when used in a
-Python attribute. It can have spaces and hyphens in it. The package display
-name is first converted to lowercase text and then any spaces or hyphens are
-converted to underscores to produce a Python package name.
+After running the cookiecutter command and passing it a reference to this
+template the first question it asks for is the package display name. This is
+the human friendly label that will be used in docs to refer to the project. It
+is also used to create the package name so it should not contain special
+characters that are invalid when used in a Python attribute. It can have spaces
+and hyphens in it. The package display name is first converted to lowercase
+text and then any spaces or hyphens are converted to underscores to produce a
+Python package name.
 
 .. code-block:: console
 
@@ -206,7 +194,7 @@ project checks.
 
 First, let's create a project specific virtual environment and activate it.
 This will install all of the project's development dependencies as well as
-the project itself. The project will be install as an editable package (by
+the project itself. The project will be installed as an editable package (by
 using the ``-e`` flag to ``pip``).
 
 .. code-block:: console
@@ -215,9 +203,9 @@ using the ``-e`` flag to ``pip``).
     ...
     Enter virtual environment using:
 
-      	source path/to/venvs/abc_123/bin/activate
+      	source venv/abc_123/bin/activate
 
-    $ source path/to/venvs/abc_123/bin/activate
+    $ source venv/abc_123/bin/activate
     (abc_123) $
 
 Now that we have a virtual environment we can check the remaining convenience
@@ -226,10 +214,11 @@ functions provided by the Makefile.
 .. code-block:: console
 
     (abc_123) $ make style
-    (abc_123) $ make check-types
+    (abc_123) $ make check-style
+    (abc_123) $ make check-static-analysis
     (abc_123) $ make test
     (abc_123) $ make test-verbose
-    (abc_123) $ make check-coverage
+    (abc_123) $ make coverage
     (abc_123) $ make check-docs
     (abc_123) $ make docs
     (abc_123) $ make serve-docs  # in browser navigate to http://localhost:8000/html

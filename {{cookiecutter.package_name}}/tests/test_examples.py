@@ -8,7 +8,6 @@ import shlex
 import subprocess
 import unittest
 
-
 # Use the current virtual environment when executing the example scripts.
 VENV_DIR = os.environ.get("VIRTUAL_ENV")
 

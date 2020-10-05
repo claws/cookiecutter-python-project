@@ -9,7 +9,9 @@
 import os
 import re
 import sys
+
 from sphinx.ext import apidoc
+
 # sys.path.insert(0, os.path.abspath('.'))
 
 
