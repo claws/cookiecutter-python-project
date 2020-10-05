@@ -2,8 +2,7 @@
 # Most actions assume it is operating in a virtual environment where the
 # python command links to the appropriate virtual environment Python.
 
-VENVS_DIR := $(HOME)/.venvs
-VENV_DIR := $(VENVS_DIR)/{{cookiecutter.package_name}}
+MAKEFLAGS += --no-print-directory
 
 # Do not remove this block. It is used by the 'help' rule when
 # constructing the help output.
@@ -19,11 +18,10 @@ help:
 # help: venv                           - create a virtual environment for development
 .PHONY: venv
 venv:
-	@test -d "$(VENVS_DIR)" || mkdir -p "$(VENVS_DIR)"
-	@rm -Rf "$(VENV_DIR)"
-	@python3 -m venv "$(VENV_DIR)"
-	@/bin/bash -c "source $(VENV_DIR)/bin/activate && pip install pip --upgrade && pip install -r requirements.dev.txt && pip install -e ."
-	@echo "Enter virtual environment using:\n\n\t$ source $(VENV_DIR)/bin/activate\n"
+	@rm -Rf venv
+	@python3 -m venv venv --prompt {{cookiecutter.package_name}}
+	@/bin/bash -c "source venv/bin/activate && pip install pip --upgrade && pip install -r requirements.dev.txt && pip install -e ."
+	@echo "Enter virtual environment using:\n\n\t$ source venv/bin/activate\n"
 
 
 # help: clean                          - clean all files using .gitignore rules
@@ -50,36 +48,71 @@ test-verbose:
 	@python -m unittest discover -s tests -v
 
 
-# help: check-coverage                 - perform test coverage checks
-.PHONY: check-coverage
-check-coverage:
-	@coverage run -m unittest discover -s tests
-	@# produce html coverage report on modules
-	@coverage html -d docs/source/coverage --include="src/{{cookiecutter.package_name}}/*"
-	@# rename coverage html file for latter use with documentation
-	@cd docs/source/coverage; mv index.html coverage.html
+# help: coverage                       - perform test coverage checks
+.PHONY: coverage
+coverage:
+	@coverage erase
+	@PYTHONPATH=src coverage run -m unittest discover -s tests -v
+	@coverage html
+	@coverage report
 
 
-# help: style                          - perform code format compliance check
+# help: format                         - perform code style format
+.PHONY: format
+format:
+	@black src/{{cookiecutter.package_name}} tests examples
+
+
+# help: check-format                   - check code format compliance
+.PHONY: check-format
+check-format:
+	@black --check src/{{cookiecutter.package_name}} tests examples
+
+
+# help: sort-imports                   - apply import sort ordering
+.PHONY: sort-imports
+sort-imports:
+	@isort . --profile black
+
+
+# help: check-sort-imports             - check imports are sorted
+.PHONY: check-sort-imports
+check-sort-imports:
+	@isort . --check-only --profile black
+
+
+# help: style                          - perform code style format
 .PHONY: style
-style:
-	@black src/{{cookiecutter.package_name}} tests
+style: sort-imports format
 
+
+# help: check-style                    - check code style compliance
+.PHONY: check-style
+check-style: check-sort-imports check-format
 
 
 # help: check-types                    - check type hint annotations
 .PHONY: check-types
 check-types:
-	@cd src; MYPYPATH=$(VENV_DIR)/lib/python*/site-packages mypy -p {{cookiecutter.package_name}} --ignore-missing-imports
+	@cd src; mypy -p {{cookiecutter.package_name}} --ignore-missing-imports
+
+
+# help: check-lint                     - run static analysis checks
+.PHONY: check-lint
+check-lint:
+	@pylint --rcfile=.pylintrc {{cookiecutter.package_name}} ./tests setup.py ./examples
+
+
+# help: check-static-analysis          - check code style compliance
+.PHONY: check-static-analysis
+check-static-analysis: check-lint check-types
 
 
 # help: docs                           - generate project documentation
-.PHONY: check-coverage
-docs: check-coverage
+.PHONY: docs
+docs: coverage
 	@cd docs; rm -rf source/api/{{cookiecutter.package_name}}*.rst source/api/modules.rst build/*
 	@cd docs; make html
-	@# Copy coverage output into docs build tree
-	@cd docs; cp -R source/coverage build/html/.
 
 
 # help: check-docs                     - quick check docs consistency

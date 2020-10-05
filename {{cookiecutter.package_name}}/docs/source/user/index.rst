@@ -11,15 +11,14 @@ Install Guide
 
 .. note::
 
-    It is best practice to install run Python projects in a virtual
-    environment, which can be created and activated as follows using
-    Python 3.6+.
+    It is best practice to install Python projects in a virtual environment,
+    which can be created and activated as follows using Python 3.6+.
 
     .. code-block:: console
 
-        $ python -m venv venv
+        $ python -m venv venv --prompt myvenv
         $ source venv/bin/activate
-        (venv) $ pip install {{cookiecutter.package_name}}
+        (myvenv) $
 
 The simplest way to install {{cookiecutter.package_display_name}} is using Pip.
 
